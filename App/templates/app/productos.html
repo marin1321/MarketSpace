@@ -1,0 +1,74 @@
+{% extends 'app/layout.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/productos.css' %}"> {% endblock %} {% block js %}
+<script>
+    function eliminarProducto(id) {
+        Swal.fire({
+                "title": "¿Estas seguro de eliminar la publicacion?",
+                "icon": "warning",
+                "showCancelButton": true,
+                "cancelButtonText": "Cancelar",
+                "confirmButtonText": "Eliminar",
+                "reverseButtons": true,
+                "confirmButtonColor": "#dc3545",
+                "background": "#a239ca",
+                customClass: {
+                    title: 'sweet_titleImportant',
+                }
+            })
+            .then(function(result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/eliminar_producto/" + id + "/"
+                }
+            })
+    }
+</script>
+
+{% endblock %} {% block contenido %} {% load humanize %}
+<br></br>
+<div class="card" style="background-color: black; margin-left: 2%; margin-right: 2%; margin-bottom: 1rem;">
+    <div class="card-body">
+        <div class="encabezado-tabla">
+            <h2 style="color: #e7dfdd;">Listado de productos</h2>
+            <a href="{% url 'agregar' %}" class="btn btn-outline-primary">Publicar</a>
+        </div>
+        <hr>
+        <table class="table table -bordered border-primary">
+
+            <tr class="tabla">
+
+                <th></th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Categoria</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+
+            </tr>
+            {% for p in entity %}
+            
+            <tr>
+                <td><img class="img" src="{{ p.foto.url }}" alt="imagen producto" width="100" height="100"></td>
+                <td>{{ p.nombre | title }}</td>
+                <td>${{ p.precio | intcomma }}</td>
+                <td>{{ p.categoria | title }}</td>
+                <td>{{ p.estado | title }}</td>
+                <td>
+                
+                    
+                    <a href="#" onclick="eliminarProducto({{ p.id }})" class="btn btn-outline-danger"><img src="{% static 'app/img/iconos/basura.png' %}" alt="Eliminar" width="23px" height="23px"></a>
+                    <a href="{% url 'modificar' p.id %}" class="btn btn-outline-success"><img src="{% static 'app/img/iconos/editar.png' %}" alt="Editar" width="23px" height="23px"></a>
+                </td>
+                
+            </tr>
+            
+            {% endfor %}
+        </table>
+        <hr>
+        <div>
+            {% include 'app/paginator.html' %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

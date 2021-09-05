@@ -1,0 +1,26 @@
+body {
+    background-color: #e7dfdd;
+    ;
+}
+
+th {
+    color: #e7dfdd;
+}
+
+td {
+    color: #e7dfdd;
+}
+
+.tabla {
+    background-color: #a239ca;
+}
+
+.sweet_titleImportant {
+    color: #e7dfdd !important;
+}
+
+.encabezado-tabla {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

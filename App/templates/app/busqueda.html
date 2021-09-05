@@ -1,0 +1,37 @@
+{% extends 'app/layout.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/inicio.css' %}"> {% endblock %} {% block contenido %}
+
+<section>
+    <h1>Categorias</h1>
+    <div class="hr">
+        <hr>
+    </div>
+    <div class="menu">
+        <div class="btn-group-vertical">
+            {% for c in categorias %}
+            <button class="btn btn-outline-primary" type="button">
+                        {{ c.nombre | title }}
+                    </button> {% endfor %}
+        </div>
+    </div>
+    <br>
+</section>
+{% load humanize %}
+<aside>
+    <div class="contenedor">
+        {% for p in productos %}
+        <div class="conte-img">
+            {% if p.foto %}
+            <img src="{{ p.foto.url }}" alt=""> {% endif %}
+            <div class="texto">
+                <h3 class="titulo">{{ p.nombre | title }}</h3>
+                <p class="parrofo">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem repellat eaque suscipit perferendis exercitationem fugit dolores enim, voluptatem eum recusandae omnis nulla facilis ut temporibus tenetur iure repellendus? Necessitatibus, fugiat!
+                </p>
+                <h4 class="precio">${{ p.precio | intcomma }}</h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</aside>
+<br><br><br> {% endblock %}
