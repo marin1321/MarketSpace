@@ -1,19 +1,24 @@
-{% extends 'app/layout.html' %} {% load static %}{% block css %}
-<link rel="stylesheet" href="{% static 'css/agregar.css' %}"> {% endblock %}{% block contenido %} {% load crispy_forms_tags %} {{ Form.media }} 
+{% extends 'app/layout.html' %} 
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/agregar.css' %}"> 
+{% endblock %}
+{% block contenido %}
+    {% load crispy_forms_tags %} 
+    {{ Form.media }} 
 
-<div class="contenedor">
-    <form action="" method="POST" class="formulario" enctype="multipart/form-data">
-        <h3>
-            <title>Subir Anuncio</title>
-        </h3>
-        <hr class="linea"> {% csrf_token %} {{ Form | crispy }}
-        <br><br>
-        <div class="boton">
-            <button type="submit" class="btn btn-outline-primary">Agregar</button> &nbsp;
-            <button type="button" class="btn btn-outline-secondary">Eliminar</button>
-        </div>
-    </form>
-{{mensaje}}
-</div>
-
+    <div class="contenedor">
+        <form action="" method="POST" class="formulario" enctype="multipart/form-data">
+            <h3>
+                <title>Subir Anuncio</title>
+            </h3>
+            <hr class="linea"> {% csrf_token %} {{ Form | crispy }}
+            <br><br>
+            <div class="boton">
+                <button type="submit" class="btn btn-outline-primary">Agregar</button> &nbsp;
+                <button type="button" class="btn btn-outline-secondary">Eliminar</button>
+            </div>
+        </form>
+        {{mensaje}}
+    </div>
 {% endblock %}

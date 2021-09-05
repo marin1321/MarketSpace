@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
  
-
+#________________________________________INICIO________________________________________#
 def inicio(request):
     productos = Producto.objects.all()
     categorias = Categoria.objects.all()
@@ -21,7 +21,9 @@ def inicio(request):
         'categorias':categorias
     }
     return render(request, 'app/inicio.html', data)
+#______________________________________________________________________________________#
 
+#________________________________________BUSCAR________________________________________#
 def buscar(request):
     if request.GET["buscar"]:
         dato=request.GET["buscar"]
@@ -30,7 +32,9 @@ def buscar(request):
         return render(request, 'app/busqueda.html', {'productos':productos, 'query':dato})
     else:
         return redirect(to="inicio")
+#______________________________________________________________________________________#
 
+#______________________________________REGISTRARSE_____________________________________#
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -47,7 +51,9 @@ def register(request):
         request.session['id'] = user.id   # Registrar que el usuario ha iniciado sesión
         messages.success(request, "Te has registrado exitosamente")
         return redirect(to="inicio")
+#______________________________________________________________________________________#
 
+#______________________________________ANUNCIOS________________________________________#
 def productos(request):
     global user_id 
     user_id = request.user.id
@@ -67,14 +73,18 @@ def productos(request):
         'paginator':paginator
     }
     return render(request, 'app/productos.html', data)
+#______________________________________________________________________________________#
 
+#____________________________ELIMINAR_ANUNCIOS_________________________________________#
 def eliminar_producto(request, id):
 
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
     messages.success(request, "Eliminado correctamente")
     return redirect(to="productos")
+#______________________________________________________________________________________#
 
+#_____________________________AGREGAR_ANUNCIOS_________________________________________#
 def agregar_producto(request):
     data = {
         'Form': ProductoForm(),
@@ -90,10 +100,10 @@ def agregar_producto(request):
             estado = request.POST.get('estado')
             descripcion = request.POST.get('descripcion')
             fecha_Expiracion = request.POST.get('fecha_Expiracion')
-            nombre = nombre.strip()  # Eliminar espacios y líneas nuevas
+            nombre = nombre.strip()  
             precio = precio.strip()
             categoria = categoria.strip()
-            estado = estado.strip()  # Eliminar espacios y líneas nuevas
+            estado = estado.strip()  
             descripcion = descripcion.strip()
             fecha_Expiracion = fecha_Expiracion.strip()
             producto = Producto()
@@ -117,7 +127,9 @@ def agregar_producto(request):
             data["Form"] = formulario
 
     return render(request, 'app/agregar.html', data)
+#______________________________________________________________________________________#
 
+#____________________________MODIFICAR_ANUNCIOS________________________________________#
 def modificar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     data = {
@@ -132,3 +144,4 @@ def modificar_producto(request, id):
         else:
             data["form"] = formulario
     return render(request, 'app/modificar.html', data)
+#______________________________________________________________________________________#
