@@ -9,9 +9,11 @@
     <div class="menu">
         <div class="btn-group-vertical">
             {% for c in categorias %}
-            <button class="btn btn-outline-primary" type="button">
+            <a href="{% url 'categorias' c.id %}" class="btn btn-outline-primary" type="button">
                         {{ c.nombre | title }}
-                    </button> {% endfor %}
+            </a> {% endfor %}<a href="{% url 'inicio' %}" class="btn btn-outline-primary" type="button">
+                Todos
+            </a>
         </div>
     </div>
     <br>
@@ -42,23 +44,6 @@
                             <a>${{ p.precio | intcomma }}</a>
                         </div>
                     </div>
-                    <!--
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Acerca Sobre Este Producto</button>
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                        <div class="offcanvas-header">
-                            <h5 id="offcanvasRightLabel">La union Hace La Fuerza</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <div class="offcanvas-body-img">
-                                {% if p.foto %}
-                                <img src="{{ p.foto.url }}" alt=""> {% endif %}
-                            </div>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae quibusdam placeat distinctio esse facere vel nam dolore laborum optio, natus explicabo, ea debitis aut maiores ab alias amet hic. Cumque?</p>
-                            <h6>precio</h6>
-                            <a>${{ p.precio | intcomma }}</a>
-                        </div>
-                    </div>-->
                 </p>
             </div>
         </div>

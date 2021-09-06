@@ -18,7 +18,7 @@ def inicio(request):
     categorias = Categoria.objects.all()
     data = {
         'productos':productos,
-        'categorias':categorias
+        'categorias':categorias,
     }
     return render(request, 'app/inicio.html', data)
 #______________________________________________________________________________________#
@@ -145,3 +145,14 @@ def modificar_producto(request, id):
             data["form"] = formulario
     return render(request, 'app/modificar.html', data)
 #______________________________________________________________________________________#
+
+
+def categorias(request, id):
+    productos = Producto.objects.filter(categoria=id)
+    categorias = Categoria.objects.all()
+    data = {
+        'productos':productos,
+        'categorias':categorias
+    }
+    return render(request, 'app/categoria.html', data)
+
