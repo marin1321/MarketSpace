@@ -1,0 +1,36 @@
+{% extends 'app/layout.html' %} {% load static %}
+
+{% block contenido %} {% load humanize %}
+<div class="row" style="margin-bottom: 60px;">
+    <div class="col-14 col-md-8 offset-md-2">
+        <div class="card" style="border-radius: 2%;">
+            <div class="card_body" style="display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 1%; background-color: #0E0B16; border: 3px solid #4717F6; border-radius: 2%;">
+                {% for p in productos %}
+                <div class="img">{% if p.foto %}<img src="{{ p.foto.url }}" style="border-radius: 2%; border: white 1px solid;" alt="" width="400px" height="400px">{% endif %}</div>
+                <div class="inf" style="margin-left: 4%; grid-column: 2/4;">
+                    <h2 style="color: white;">{{ p.nombre | title }}<span class="badge bg-secondary">{{ p.estado | title }}</span></h2>
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item"  style="background-color: #E7D7DD;">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button style="background-color: #0D6EFD;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            <h3 style="color: white;">Descripcion Del Producto</h3>
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                              <strong>{{ p.descripcion }}</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <h3 style="color: white;">Categoria:{{ p.categoria | title }}</h3>
+                      <h3 style="color: white;">Precio:${{ p.precio | intcomma }}</h3>
+                </div> 
+                {% endfor %}          
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

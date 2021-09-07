@@ -116,11 +116,13 @@ def agregar_producto(request):
             categoria = request.POST.get('categoria')
             estado = request.POST.get('estado')
             descripcion = request.POST.get('descripcion')
+            numero_telefonico = request.POST.get('numero_telefonico')
             nombre = nombre.strip()
             precio = precio.strip()
             categoria = categoria.strip()
             estado = estado.strip()
             descripcion = descripcion.strip()
+            numero_telefonico = numero_telefonico.strip()
             producto = Producto()
             producto.foto = foto
             producto.nombre = nombre
@@ -130,6 +132,7 @@ def agregar_producto(request):
             estado = Estado.objects.get(id=estado)
             producto.estado = estado
             producto.descripcion = descripcion
+            producto.numero_telefonico = numero_telefonico
             global user_id
             user_id = request.user.id
             user = User.objects.get(id=user_id)
@@ -160,6 +163,12 @@ def modificar_producto(request, id):
     return render(request, 'app/modificar.html', data)
 #______________________________________________________________________________________#
 
+def vista(request, id):
+    producto = Producto.objects.filter(id=id)
+    data = {
+        'productos':producto
+    }
+    return render(request, 'app/vista.html', data)
 
 def categorias(request, id):
     productos = Producto.objects.filter(categoria=id)

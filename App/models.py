@@ -22,6 +22,7 @@ class Producto(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
     descripcion = models.TextField()
+    numero_telefonico = models.IntegerField()
     fecha_Publicacion = models.DateField(auto_now_add=True ,blank=True, null=True)
     usuario = models.ForeignKey(User, on_delete=models.SET, blank=True, null=True)
     
