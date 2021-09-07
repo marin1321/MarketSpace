@@ -23,7 +23,6 @@ class Producto(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
     descripcion = models.TextField()
     fecha_Publicacion = models.DateField(auto_now_add=True ,blank=True, null=True)
-    fecha_Expiracion = models.DateField()
     usuario = models.ForeignKey(User, on_delete=models.SET, blank=True, null=True)
     
     def __str__(self):
@@ -34,7 +33,8 @@ opciones_consulta = [
     [0, "consulta"],
     [1, "reclamo"],
     [2, "sugerencia"],
-    [3, "felitaciones"]
+    [3, "felitaciones"],
+    [4, "Otro asunto"]
 ]
 
 class Contacto(models.Model):

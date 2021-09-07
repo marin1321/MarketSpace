@@ -1,4 +1,3 @@
-from django.contrib import auth
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from .models import *
@@ -16,9 +15,11 @@ from django.contrib.auth.models import User
 def inicio(request):
     productos = Producto.objects.all()
     categorias = Categoria.objects.all()
+    estados = Estado.objects.all()
     data = {
         'productos':productos,
         'categorias':categorias,
+        'estados':estados
     }
     return render(request, 'app/inicio.html', data)
 #______________________________________________________________________________________#
@@ -27,9 +28,11 @@ def inicio(request):
 def buscar(request):
     if request.GET["buscar"]:
         dato=request.GET["buscar"]
-        productos = Producto.objects.filter(nombre__icontains=dato) 
+        productos = Producto.objects.filter(nombre__icontains=dato)
+        categorias = Categoria.objects.all()
+        estados = Estado.objects.all()
 
-        return render(request, 'app/busqueda.html', {'productos':productos, 'query':dato})
+        return render(request, 'app/busqueda.html', {'productos':productos, 'query':dato, 'categorias':categorias, 'estados':estados})
     else:
         return redirect(to="inicio")
 #______________________________________________________________________________________#
@@ -84,6 +87,20 @@ def eliminar_producto(request, id):
     return redirect(to="productos")
 #______________________________________________________________________________________#
 
+def servicio_cliente(request):
+    data = {
+        'Form': ClienteForm(),
+    }
+
+    if request.method=='POST':
+        formulario = ClienteForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Mensaje enviado")
+        else:
+            data["Form"] = formulario
+    return render(request, 'app/cliente.html', data)
+
 #_____________________________AGREGAR_ANUNCIOS_________________________________________#
 def agregar_producto(request):
     data = {
@@ -99,13 +116,11 @@ def agregar_producto(request):
             categoria = request.POST.get('categoria')
             estado = request.POST.get('estado')
             descripcion = request.POST.get('descripcion')
-            fecha_Expiracion = request.POST.get('fecha_Expiracion')
-            nombre = nombre.strip()  
+            nombre = nombre.strip()
             precio = precio.strip()
             categoria = categoria.strip()
-            estado = estado.strip()  
+            estado = estado.strip()
             descripcion = descripcion.strip()
-            fecha_Expiracion = fecha_Expiracion.strip()
             producto = Producto()
             producto.foto = foto
             producto.nombre = nombre
@@ -115,8 +130,7 @@ def agregar_producto(request):
             estado = Estado.objects.get(id=estado)
             producto.estado = estado
             producto.descripcion = descripcion
-            producto.fecha_Expiracion = fecha_Expiracion
-            global user_id 
+            global user_id
             user_id = request.user.id
             user = User.objects.get(id=user_id)
             producto.usuario = user
@@ -150,9 +164,21 @@ def modificar_producto(request, id):
 def categorias(request, id):
     productos = Producto.objects.filter(categoria=id)
     categorias = Categoria.objects.all()
+    estados = Estado.objects.all()
     data = {
         'productos':productos,
-        'categorias':categorias
+        'categorias':categorias,
+        'estados':estados
     }
     return render(request, 'app/categoria.html', data)
 
+def estados(request, id):
+    productos = Producto.objects.filter(estado=id)
+    estados = Estado.objects.all()
+    categorias = Categoria.objects.all()
+    data = {
+        'productos':productos,
+        'categorias':categorias,
+        'estados':estados
+    }
+    return render(request, 'app/estado.html', data)

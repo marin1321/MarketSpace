@@ -1,3 +1,8 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
 body {
     margin: 0%;
     background-color: #E7DFDD;
@@ -54,4 +59,8 @@ footer {
     justify-content: center;
     font-family: Arial;
     color: #E7DFDD;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
 }

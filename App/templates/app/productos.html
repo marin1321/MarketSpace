@@ -25,7 +25,7 @@
 
 {% endblock %} {% block contenido %} {% load humanize %}
 <br></br>
-<div class="card" style="background-color: black; margin-left: 2%; margin-right: 2%; margin-bottom: 1rem;">
+<div class="card" style="background-color: black; margin-left: 2%; margin-right: 2%; margin-bottom: 1rem; margin-bottom: 60px;">
     <div class="card-body">
         <div class="encabezado-tabla">
             <h2 style="color: #e7dfdd;">Listado de Anuncios</h2>
@@ -41,6 +41,7 @@
                 <th>Precio</th>
                 <th>Categoria</th>
                 <th>Estado</th>
+                <th>Publicacion</th>
                 <th>Opciones</th>
 
             </tr>
@@ -52,6 +53,7 @@
                 <td>${{ p.precio | intcomma }}</td>
                 <td>{{ p.categoria | title }}</td>
                 <td>{{ p.estado | title }}</td>
+                <td>{{ p.fecha_Publicacion }}</td>
                 <td>
                 
                     

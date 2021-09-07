@@ -86,6 +86,10 @@ section h1 {
     font-size: 70%;
 }
 
+.texto:hover{
+    background-color: #0e0b16af;
+}
+
 .titulo .parrofo {
     margin: 10px;
     padding: 5px;
@@ -175,4 +179,8 @@ h5 {
     font-size: 180%;
     display: flex;
     justify-content: center;
+}
+
+.section{
+    margin-bottom: 60px;
 }

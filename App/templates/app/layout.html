@@ -30,7 +30,7 @@
             {% if user.is_authenticated %}
                 <a href="{% url 'productos' %}"><button type="button" class="btn btn-outline-primary">Tus Anuncios</button>
             {% endif %}
-            <a href="#"><button type="button" class="btn btn-outline-primary">Servicio Al Cliente</button></a>
+            <a href="{% url 'cliente' %}"><button type="button" class="btn btn-outline-primary">Servicio Al Cliente</button></a>
             {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary">Log Out</button></a></a>
             {% else %}
