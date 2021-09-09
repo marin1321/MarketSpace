@@ -10,7 +10,9 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
- 
+def traz(request):
+    return render(request, 'app/traz.html')
+
 #________________________________________INICIO________________________________________#
 def inicio(request):
     productos = Producto.objects.all()

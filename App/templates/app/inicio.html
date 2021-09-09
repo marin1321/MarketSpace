@@ -1,5 +1,6 @@
 {% extends 'app/layout.html' %} {% load static %} {% block css %}
-<link rel="stylesheet" href="{% static 'css/inicio.css' %}"> {% endblock %} {% block contenido %}
+<link rel="stylesheet" href="{% static 'css/inicio.css' %}"> {% endblock %}
+{% block contenido %}
 
 <section class="section">
     <h1>Categorias</h1>
@@ -50,4 +51,6 @@
         {% endfor %}
     </div>
 </aside>
-<br><br><br> {% endblock %}
+<br><br><br>
+
+{% endblock %}

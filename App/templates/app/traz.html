@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@gitgraph/js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>GIT</h1>
+    <div id="graph-container"></div>
+
+    <script>
+        const options = ({
+	template : "blackarrow",
+	orientation : "vertical",
+	mode : "extended",
+	elementId : "graph",
+});
+     
+        
+        const graphContainer = document.getElementById("graph-container");
+ // Instantiate the graph.
+ const gitgraph = GitgraphJS.createGitgraph(graphContainer, options);
+
+ options.orientation="horizontal"
+ 
+ // Simulate git commands with Gitgraph API.
+ const master = gitgraph.branch("master");
+ master.commit("Modulo de autentificacion de usuarios");
+ master.commit("Sub funcionalidad de agregar anuncios");
+ master.commit("Categorias y eliminar anuncios");
+ master.commit("filtros y ajuste de base de datos");
+ master.commit("Funcionalidad modificar anuncios y vista de productos");
+ master.commit("Iconos editar y eliminar");
+ master.commit("Testeo y tag de iconos en productos");
+ master.commit("Nuevos anuncios");
+ master.commit("Exposicion");
+
+ master.tag("v1.0");
+ 
+ 
+    </script>
+
+    
+</body>
+</html>
